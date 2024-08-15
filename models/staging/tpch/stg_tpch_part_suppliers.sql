@@ -23,3 +23,4 @@ renamed as (
 )
 
 select * from renamed
+-- adding a comment to show how pr works
