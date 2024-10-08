@@ -19,12 +19,19 @@
     create or replace table {{ central_tbl }} as (
   
     {% for result in test_results %}
-      {% set model_name = None %}
-      {%- for node in result.node.depends_on.nodes -%}
-        {%- if node.startswith('model.') -%}  {# Checking for the model reference #}
-          {% set model_name = node.split('.')[1] %} {# Extract model name from the node reference #}
-        {%- endif -%}
-      {%- endfor -%}
+        {% set model_name = None %}
+        
+        {# Try to use meta attribute as fallback for model name extraction #}
+        {% if result.node.meta.get('model_name') is not none %}
+          {% set model_name = result.node.meta.get('model_name') %}
+        {% else %}
+          {# Fallback to extracting model name from depends_on.nodes #}
+          {%- for node in result.node.depends_on.nodes -%}
+            {%- if node.startswith('model.') -%}
+              {% set model_name = node.split('.')[1] %}
+            {%- endif -%}
+          {%- endfor -%}
+        {% endif %}
   
       select
         '{{ result.node.name }}' as test_name,
