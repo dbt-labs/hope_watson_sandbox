@@ -1,0 +1,18 @@
+snapshots:
+  - name: snapshot_source_vendor_address
+    relation: source('daimler_mock', 'vendor_address')
+    config:
+      schema: dbt_hwatson
+      unique_key: VNDR_ID
+      strategy: check
+      check_cols:
+        - VNDR_ID
+        - ADDR_OWNER
+        - ADDR_FUNCT_DP
+        - ADDR_LN_1
+        - ADDR_LN_2
+        - CITY
+        - ST_CD
+        - ZIP_CD
+        - CTRY_CD
+      dbt_valid_to_current: "date('2099-12-31')"

@@ -34,7 +34,6 @@ on-run-start:
 
 on-run-end:
   - "{{ grant_all_on_schemas(schemas, 'transformer') }}"
-  - "{{ centralize_test_failures(results) }}"
 
 vars:
   start_date: '1999-01-01'

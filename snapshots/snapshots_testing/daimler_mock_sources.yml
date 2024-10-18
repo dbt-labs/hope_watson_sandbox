@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: daimler_mock
+    description: mock data
+    schema: dbt_hwatson
+    tables:
+      - name: vendor_address
