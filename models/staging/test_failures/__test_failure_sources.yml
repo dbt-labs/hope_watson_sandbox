@@ -1,0 +1,18 @@
+version: 2
+
+
+sources:
+  - name: test_failures
+    description: Bringing out test failures into our dbt project as a source to unnest them further. 
+    database: analytics
+    schema: dbt_hwatson
+    tables:
+      - name: test_failure_central
+        description: >
+          The test_failure_central table is created or replaced on every dbt build --store-failures. 
+          It captures only the test failures of the latest run. To view the complete history use the test_failure_history. 
+      - name: test_failure_history 
+        description: >
+          The test_failure_history is only created if it doesn't exist. Every subsequent run inserts into the talbe. 
+          It captures all the test failures when --store-failures is used.
+    
