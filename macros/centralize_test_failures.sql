@@ -39,7 +39,7 @@
     );
   
     {# all to run in all environments including lower dev env #}
-    {% if target.name == 'default' %}
+    {% if target.name != 'default' %}
 
       {{ log("Creating the history table " + history_tbl + " if it does not already exist.", info = true) if execute }}
 
