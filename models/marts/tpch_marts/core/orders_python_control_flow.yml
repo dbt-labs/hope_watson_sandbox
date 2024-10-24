@@ -1,0 +1,7 @@
+# models/marts/tpch_marts/core/orders_python_control_flow.yml
+version: 2
+
+models:
+  - name: orders_python_control_flow  # Match the model name exactly
+    config:
+      run_frequency: "{{ var('run_frequency') }}"  # Access variable from dbt_project.yml
