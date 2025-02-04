@@ -1,9 +1,12 @@
 {% macro generate_schema_name(custom_schema_name, node) -%}
     {%- set env = env_var('DBT_CURRENT_ENV', '') -%}
-
-    {% do log("Target Schema: " ~ target.schema, info=True) %}
-    {% do log("Custom Schema Name: " ~ (custom_schema_name if custom_schema_name else 'None'), info=True) %}
-    {% do log("Environment: " ~ env, info=True) %}
+    
+    {# Ensure logging happens only once per run #}
+    {% if not var('schema_log_shown', False) %}
+        {% do log("DBT Run Environment: " ~ env, info=True) %}
+        {% do log("DBT Target Schema: " ~ target.schema, info=True) %}
+        {% do var('schema_log_shown', True) %}
+    {% endif %}
 
 
     {%- if env == 'dev' -%}
