@@ -5,6 +5,7 @@
         {{ target.schema }}
     {%- elif env == 'prod' -%}
         {{ custom_schema_name | trim | default(target.schema) }}
+        {% do log("Target Schema: " ~ target.schema, info=True) %}
     {%- else -%}
         {% do exceptions.raise_compiler_error("Invalid DBT_CURRENT_ENV. Must be 'dev' or 'prod'.") %}
     {%- endif -%}
