@@ -8,7 +8,7 @@
     {%- if env == 'dev' -%}
         {{ target.schema }}
     {%- elif env == 'prod' -%}
-        {{ custom_schema_name | trim | default(target.schema) }}
+        {{ custom_schema_name | default(target.schema) | trim }}
     {%- else -%}
         {% do exceptions.raise_compiler_error("Invalid DBT_CURRENT_ENV. Must be 'dev' or 'prod'.") %}
     {%- endif -%}
