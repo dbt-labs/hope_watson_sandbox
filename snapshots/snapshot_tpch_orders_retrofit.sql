@@ -8,9 +8,8 @@
       updated_at='o_orderdate',
        snapshot_meta_column_names={
               'dbt_valid_from': 'valid_from',
-              'dbt_valid_to': 'valid_to'
-      }
-      
+              'dbt_valid_to': 'valid_to' },
+      enabled=false
     )
 }}
 
