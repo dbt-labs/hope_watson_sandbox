@@ -2,17 +2,8 @@ import os
 import snowflake.snowpark as snowpark
 
 def model(dbt, session):
-    # Get environment and base schema
-    env = os.getenv('DBT_MY_ENV', 'dev')
-    base_schema = dbt.config.get('schema') or dbt.this.schema
-
-    # Determine schema based on environment
-    if env in ['prod', 'qa']:
-        schema_name = f"{base_schema}"
-    elif env == 'dev':
-        schema_name = f"{base_schema}"
-    else:
-        schema_name = f"{base_schema}_staging"
+    # Get base schema directly
+    schema_name = dbt.config.get('schema') 
 
     # Construct stage name
     stage_name = f"{schema_name}_stage"
