@@ -1,18 +1,16 @@
 {% macro generate_schema_name(custom_schema_name, node) -%}
-    {%- set env = env_var('DBT_CURRENT_ENV', '') -%}
-    
-    {% do log("dbt Run Environment: " ~ env_var('DBT_CURRENT_ENV', ''), info=True) %}
-    {% do log("dbt Target Schema: " ~ target.schema, info=True) %}
-    {% do context.update({'schema_log_shown': True}) %}
 
-    {%- if env == 'dev' -%}
-        {{ target.schema }}
-    {%- elif env == 'prod' -%}
-        {# Ensure a valid schema is always assigned #}
-        {{ (custom_schema_name | trim) if custom_schema_name else target.schema }}
+    {%- set default_schema = target.schema -%}
+    {%- set env = env_var('DBT_MY_ENV', '') -%}
+
+    {%- if custom_schema_name is none -%}
+        {{ default_schema }}
+    {%- elif env == 'dev' -%}
+        {{ default_schema }}
+    {%- elif env in ['prod', 'qa'] -%}
+        {{ custom_schema_name | trim }}
     {%- else -%}
-        {% do exceptions.raise_compiler_error("Invalid DBT_CURRENT_ENV. Must be 'dev' or 'prod'.") %}
+        {{ default_schema }}_{{ custom_schema_name | trim }}
     {%- endif -%}
 
 {%- endmacro %}
-
