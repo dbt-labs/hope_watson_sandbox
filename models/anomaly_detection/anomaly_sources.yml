@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: anomaly_detection_examples 
+    database: analytics
+    schema: dbt_hwatson 
+    tables: 
+      - name: historical_sales_data
+      - name: new_sales_data
+
+      
+      
