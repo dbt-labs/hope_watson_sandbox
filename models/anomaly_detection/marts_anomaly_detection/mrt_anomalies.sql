@@ -1,15 +1,15 @@
 {{ config(materialized="table") }}
 
-with anomaly_calc as (  -- Renaming z_score_results to c
+with anomaly_calc as (  
     select
         sk, 
         store_id,
         item,
         date,
         sales,
-        z_score,  -- Renaming z_score to calculation
+        z_score,  
         is_anomaly_calculation
-    from {{ ref('int_statistician_anomaly_calculation') }}  -- Reference Z-score model
+    from {{ ref('int_statistician_anomaly_calculation') }}  
 ),
 
 ml_anomaly_results as (
@@ -23,7 +23,7 @@ ml_anomaly_results as (
         lower_bound,
         upper_bound,
         is_anomaly_algorithm
-    from {{ ref('int_call_anomaly_detection') }}  -- Reference ML model
+    from {{ ref('int_call_anomaly_detection') }}  
 )
 
 select 
