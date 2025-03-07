@@ -9,6 +9,7 @@ source as (
 renamed as (
 
     select
+        {{ dbt_utils.generate_surrogate_key(['store_id', 'item','date','sales']) }} as sk,
         store_id,
         item,
         date,
