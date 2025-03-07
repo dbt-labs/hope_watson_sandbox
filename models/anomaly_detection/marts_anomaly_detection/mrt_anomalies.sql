@@ -31,10 +31,11 @@ select
     c.item,
     c.date,
     c.sales,
-    c.is_anomaly_calculation,
+    c.z_score,
     ml.forecast,
     ml.lower_bound,
     ml.upper_bound,
+    c.is_anomaly_calculation,
     ml.is_anomaly_algorithm,
     case 
         when c.is_anomaly_calculation = ml.is_anomaly_algorithm then true
