@@ -1,11 +1,10 @@
 with historical_distribution as (
-    -- find the max date from historical sales data
+    -- this is mostly as a placeholder if in the historical_stats cte you need to do date subtraction on your specific dataset
     select max(date) as max_historical_date
     from {{ ref('stg_historical_sales_data') }}
 ),
 
 historical_stats as (
-    -- calculate mean and std dev using log-transformed sales to prevent negative values
     select 
         item,
         avg(ln(sales + 1)) as log_mean_sales,  -- log-transform to prevent negative values
@@ -38,3 +37,5 @@ select
     case when abs(z_score) > 3 then true else false end as is_anomaly_calculation
 from new_sales_analysis
 order by item, date
+
+
