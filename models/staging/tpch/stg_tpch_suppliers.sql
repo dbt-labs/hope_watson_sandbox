@@ -1,3 +1,8 @@
+{{
+    config(
+        tags=["suppliers"] 
+    )
+}}
 with source as (
 
     select * from {{ source('tpch', 'supplier') }}
