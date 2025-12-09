@@ -1,0 +1,11 @@
+{
+  "account_id": 97986,
+  "base_url": "https://cloud.getdbt.com/api/v2",
+
+  "environments": {
+    "prod": 331709,
+    "qa": 407136
+  },
+
+  "poll_interval_seconds": 15
+}
