@@ -2,6 +2,8 @@
 
 This folder contains lightweight tooling for orchestrating **dbt platform jobs** using the dbt Platform API. It supports running job groups, filtering by naming patterns, and triggering jobs either synchronously or fire-and-forget. Configuration stays simple, and schedulers like Control-M can call the script directly.
 
+Additionally, there is an audit script to ensure model tags and job names match. 
+
 ---
 
 ## Files
@@ -23,11 +25,36 @@ Holds stable configuration:
 - optional `environments` mapping
 - `poll_interval_seconds`
 
-Job grouping is intentionally passed in at runtime using CLI flags, not stored in config.
+### `audit_tags_vs_jobs.py` (Tag Audit Script)
+
+This script cross-checks dbt model tags from `target/manifest.json` against dbt Platform jobs.
+
+It verifies:
+1. Tags defined on models **that also have matching jobs**
+2. Tags in the manifest **with no corresponding jobs**
+3. Tags referenced in job commands **that don’t exist in the manifest**
+4. Jobs using tags in commands **but missing the naming token `tag:<tag>` in the job name**
+
+This helps ensure consistency between:
+- dbt model tagging (in the project)
+- dbt job grouping (via naming conventions)
+
+Run from the **dbt project root**:
+
+For example to run the audit on a specific project and to warn only the mismatches:
+```bash
+python dbt_platform_job_orchestration/audit_tags_vs_jobs.py \
+  --config dbt_platform_job_orchestration/job_orchestration_config.json \
+  --project-id 381975 \
+  --warn-only
+```
+This will output your results of the 4 categories to help identify if model tags and job names do match otherwise list out how they mismatch. 
+
+Note: Job grouping is intentionally passed in at runtime using CLI flags, not stored in config.
 
 ---
 
-## Usage
+## Orchestration Usage
 
 Set your dbt Platform API token:
 
