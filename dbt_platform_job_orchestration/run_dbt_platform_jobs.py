@@ -5,7 +5,7 @@ import time
 import requests
 
 SUCCESS = {10}
-FAILURE = {20, 30, 40}
+FAILURE = {20, 30}
 
 
 def list_jobs(account_id, base_url, token, env_id=None, name_filter=None):
