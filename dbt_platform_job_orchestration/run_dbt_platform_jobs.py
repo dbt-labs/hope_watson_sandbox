@@ -13,7 +13,6 @@ def list_jobs(account_id, base_url, token, env_id=None, name_filter=None):
     jobs = []
     params = {
         "state": 1,  # active only
-        "limit": 100,
     }
     if env_id:
         params["environment_id"] = env_id
