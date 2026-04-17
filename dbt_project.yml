@@ -40,13 +40,21 @@ vars:
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
 models:
-
   central_data_team_partner_eng_inc:
     staging:
-      +materialized: view
-
+      tpch:
+        +materialized: table
+      jaffle_shop:
+        +enabled: false
     marts:
       tpch_marts:
         +materialized: table
+      jaffle_marts:
+        +enabled: false
+
+seeds:
+  central_data_team_partner_eng_inc:
+    +enabled: false
+
 flags:
   require_generic_test_arguments_property: true
