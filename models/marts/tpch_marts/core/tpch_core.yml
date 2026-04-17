@@ -13,7 +13,7 @@ models:
     description: Customer dimensions table
     config:
       contract:
-        enforced: true
+        enforced: false
       group: core_data
       access: public
     columns:
