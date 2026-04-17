@@ -24,11 +24,11 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-on-run-start:
-  - '{{create_udfs()}}' # comment / uncomment this line to build UDFs called in the create_udfs macro
+# on-run-start:
+#   - '{{create_udfs()}}' # comment / uncomment this line to build UDFs called in the create_udfs macro
 
-on-run-end:
-  - "{{ grant_all_on_schemas(schemas, 'transformer') }}"
+# on-run-end:
+#   - "{{ grant_all_on_schemas(schemas, 'transformer') }}"
 
 vars:
   start_date: '1999-01-01'
