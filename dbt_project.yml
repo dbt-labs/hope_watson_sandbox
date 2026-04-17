@@ -5,8 +5,8 @@ name: 'central_data_team_partner_eng_inc'
 version: '1.5.0'
 require-dbt-version: '>=1.6.0'
 config-version: 2
-dbt-cloud:
-  project-id: "381975"
+# dbt-cloud:
+#   project-id: "381975"
 
 # This setting configures which "profile" dbt uses for this project.
 # profile: 'tpch'
