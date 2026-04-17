@@ -40,8 +40,6 @@ vars:
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
 models:
-  +grants:
-    select: ['transformer']
 
   central_data_team_partner_eng_inc:
     staging:
